@@ -13,14 +13,14 @@ export default {
             return context.planetLoader.load( obj.planet_code )
         },
     },
-    FlightResponse : {
-        launchSite :   (obj, args, context, info) => {
-            return  context.spaceCenterLoaderById.load( obj.launchSite ) 
-        }, 
-        landingSite:    (obj, args, context, info) => {
-            return   context.spaceCenterLoaderById.load( obj.landingSite )  
-        }, 
-    },
+    // FlightResponse : {
+    //     launchSite :   (obj, args, context, info) => {
+    //         return  context.spaceCenterLoaderById.load( obj.launchSite ) 
+    //     }, 
+    //     landingSite:    (obj, args, context, info) => {
+    //         return   context.spaceCenterLoaderById.load( obj.landingSite )  
+    //     }, 
+    // },
     Flight: {
         launchSite :   (obj, args, context, info) => {
             return  context.spaceCenterLoaderById.load( obj.launch_site )   

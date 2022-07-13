@@ -14,9 +14,18 @@ console.log({
 })
 const configs: IknexConfig = {
   test: {
-    client: "sqlite3",
+  client: "postgresql",//////meant to change to sql lite
     connection: {
-      filename: "./dev.sqlite3"
+      database: process.env.POSTGRES_DATABASE,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: "knex_migrations"
     }
   },
 

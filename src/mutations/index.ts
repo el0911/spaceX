@@ -17,7 +17,6 @@ export default {
                 throw new Error('Cant find the Space center')
             }
 
-
             const data = {
                 code: uuidv4(),
                 launch_site: launchSiteId,
@@ -34,8 +33,8 @@ export default {
                 await trx.commit();
                  return {
                     ...returnData[0],
-                    launchSite : returnData[0].launch_site,
-                    landingSite : returnData[0].landing_site,
+                    launchSite : launch,
+                    landingSite : land,
                     departureAt : returnData[0].departure_at,
                     seatCount: returnData[0].seat_count,
                     availableSeats:returnData[0].available_seats,
