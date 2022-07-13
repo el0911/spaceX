@@ -1,0 +1,95 @@
+type Planet {
+  id: Int,
+  name: String,
+  code: String,
+  spaceCenters(limit: Int) :[SpaceCenter]
+ }
+
+type SpaceCenter {
+  id: Int,
+  name: String,
+  uid: String,
+  description: String,
+  planet: Planet,
+  latitude: String,
+  longitude: String,
+ }
+
+ type pagination {
+  total : Int,
+  page : Int,
+  pageSize:Int,
+ }
+
+ type PaginatedSpace {
+    pagination : pagination,
+    nodes :[ SpaceCenter]
+  }
+
+  type PaginatedBookings  {
+    pagination : pagination,
+    nodes :[ BookingResponse]
+  }
+
+   type PaginatedFlights {
+    pagination : pagination,
+    nodes :[ PaginatedFlights]
+  }
+
+  input flightInfo{
+    launchSiteId : Int,
+    landingSiteId: Int,
+    departureAt: String,
+    seatCount: Int,
+  }
+
+  input bookingInfo{
+    seatCount: Int,
+    flightId: Int, 
+     email: String,
+  }
+
+  type Flight{
+   id : Int,
+    code : String,
+    launchSite :  SpaceCenter,
+    landingSite  :SpaceCenter,
+    availableSeats : Int,
+    seatCount: Int,
+    departureAt: String,
+  }
+
+  type FlightResponse {
+    id : Int,
+    code : String,
+    launchSite :  SpaceCenter,
+    landingSite  :SpaceCenter,
+    availableSeats : Int,
+    seatCount: Int,
+    departureAt: String,
+  }
+
+  type BookingResponse {
+    id : Int,
+    email:String,
+    flight : Flight,
+    seatCount : Int
+  }
+  
+
+extend type Query {
+  planets: [Planet],
+  spaceCenters(page: Int,pageSize : Int) : PaginatedSpace,
+  spaceCenter(id: Int,uid : String ) : SpaceCenter,
+  bookings(page: Int,pageSize : Int,email : String) : PaginatedBookings,
+  booking(id: Int ) : BookingResponse,
+  flight(id: Int ):Flight,
+  flights(pageSize: Int, page: Int, from : Int , to : Int, seatCount : Int ,availableSeats : Int,departureDay : String  ) : PaginatedFlights,
+}
+
+
+
+type Mutation {
+  scheduleFlight(flightInfo: flightInfo) : FlightResponse,
+  bookFlight(bookingInfo: bookingInfo) : BookingResponse,
+ }
